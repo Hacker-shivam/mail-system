@@ -1,87 +1,55 @@
 import mongoose from "mongoose";
 
-const TrackingSchema = new mongoose.Schema(
-  {
-    // =====================
-    // USER INFO
-    // =====================
+const trackingSchema = new mongoose.Schema({
 
     trackingId: String,
+
     email: String,
 
-    // =====================
-    // EVENT INFO
-    // =====================
-
-    eventType: String, 
-    // open | click | form_submit | render_detected
-
-    emailType: String,
-    // amp | html
-
-    // =====================
-    // RENDER TRACKING 
-    // =====================
-
-    render: {
-      type: {
+    emailType: {
         type: String,
-        enum: ["amp", "html", "unknown"],
-      },
-
-      detectedVia: String,
-      // amp_form | pixel | fallback | header_guess
-
-      confidence: {
-        type: Number,
-        default: 0,
-      },
-
-      detectedAt: {
-        type: Date,
-        default: Date.now,
-      }
+        enum: ["html", "amp"]
     },
 
-    // =====================
-    // DEVICE INFO
-    // =====================
+    eventType: {
+        type: String,
+        enum: [
+            "open",
+            "click",
+            "form_submit"
+        ]
+    },
 
-    ip: String,
-    country: String,
-    city: String,
-    browser: String,
-    os: String,
-    device: String,
-    userAgent: String,
+    render: {
 
-    // =====================
-    // CLICK INFO
-    // =====================
+        ip: String,
+
+        country: String,
+
+        city: String,
+
+        browser: String,
+
+        os: String,
+
+        device: String,
+
+        userAgent: String
+    },
 
     clickedUrl: String,
 
-    // =====================
-    // FORM SUBMISSION
-    // =====================
-
     formSubmission: {
-      submitted: {
-        type: Boolean,
-        default: false
-      },
-
-      formType: String,
-      // amp | html
-
-      submittedAt: Date,
-      formData: Object
+        type: Object,
+        default: {}
     }
 
-  },
-  {
+},
+{
     timestamps: true
-  }
-);
+});
 
-export default mongoose.model("Tracking", TrackingSchema);
+export default mongoose.model(
+    "Tracking",
+    trackingSchema
+);
