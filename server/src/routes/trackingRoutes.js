@@ -6,6 +6,8 @@ import {
    ampFormTracking,
    htmlFormTracking
 } from "../controllers/trackingController.js";
+
+import { analyticsOverview } from "../controllers/analyticsController.js";
 import formTemplate from "../templates/formTemplate.js";
 
 const router = express.Router();
@@ -41,6 +43,10 @@ router.post(
    htmlFormTracking
 );
 
+// analytic routes
+
+router.get("/analytics", analyticsOverview);
+
 router.get("/form/:id", (req, res) => {
 
   const trackingId = req.params.id;
@@ -48,6 +54,8 @@ router.get("/form/:id", (req, res) => {
   res.send(formTemplate(trackingId));
 
 });
+
+
 
 
 export default router;
