@@ -1,57 +1,39 @@
 import transporter from "../config/mailer.js";
-
 import ampTemplate from "../templates/ampTemplate.js";
-
 import htmlTemplate from "../templates/htmlTemplate.js";
-
-import { generateTrackingId }
-from "../utils/tracking.js";
+import { generateTrackingId } from "../utils/tracking.js";
 
 const sendTrackingEmail = async (userEmail) => {
+  try {
+    const trackingId = generateTrackingId(userEmail);
 
-   try {
+    // Verify SMTP connection
+    await transporter.verify();
 
-      const trackingId = generateTrackingId(userEmail);
+    console.log("SMTP CONNECTED");
 
-      await transporter.verify();
+    const info = await transporter.sendMail({
+      from: `"Tracker Test" <${process.env.SMTP_FROM}>`,
 
-      console.log("SMTP CONNECTED");
+      to: userEmail,
 
-      const info =
-         await transporter.sendMail({
+      subject: "AMP + HTML Tracking Test",
 
-            from:
-               `"Tracker Test" <${process.env.SMTP_FROM}>`,
+      text: "Your email client does not support HTML or AMP emails.",
 
-            to: userEmail,
+      html: htmlTemplate(trackingId),
 
-            subject:
-               "AMP + HTML Tracking Test",
+      amp: ampTemplate(trackingId),
+    });
 
-            text: "Tracking Email",
+    console.log("EMAIL SENT:", info.messageId);
 
-            html:
-               htmlTemplate(trackingId),
+    return info;
 
-            amp:
-               ampTemplate(trackingId)
-
-         });
-
-      console.log(
-         "EMAIL SENT:",
-         info.messageId
-      );
-
-   } catch (err) {
-
-      console.error(
-         "EMAIL ERROR:",
-         err
-      );
-
-   }
-
+  } catch (err) {
+    console.error("EMAIL ERROR:", err);
+    throw err;
+  }
 };
 
 export default sendTrackingEmail;
