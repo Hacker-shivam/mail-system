@@ -2,6 +2,7 @@ import express from "express";
 
 import trackingRoutes from "./routes/trackingRoutes.js";
 import corsMiddleware from "./middleware/corsMiddleware.js";
+import emailRoutes from "./routes/emailRoutes.js";
 
 const app = express();
 
@@ -19,7 +20,12 @@ app.set("trust proxy", true);
 
 app.use(corsMiddleware);
 
+// email routes
+app.use("/api", emailRoutes);
+
 /* ROUTES */
+
+
 
 app.use("/track", trackingRoutes);
 
