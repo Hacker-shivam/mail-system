@@ -1,150 +1,73 @@
 const ampTemplate = (trackingId) => {
-  const baseUrl = process.env.API_URL;
+  const baseUrl = process.env.API_URL; // Ensure this starts with https://
 
   return `
-<!DOCTYPE html>
-<html ⚡4email>
-
+<!doctype html>
+<html ⚡4email data-css-strict>
 <head>
   <meta charset="utf-8">
-
   <script async src="https://cdn.ampproject.org/v0.js"></script>
 
-  <script
-    async
-    custom-element="amp-form"
-    src="https://cdn.ampproject.org/v0/amp-form-0.1.js">
-  </script>
+  <!-- Required for forms -->
+  <script async custom-element="amp-form"
+    src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 
-  <script
-    async
-    custom-template="amp-mustache"
-    src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js">
-  </script>
+  <!-- Required for success/error messages -->
+  <script async custom-template="amp-mustache"
+    src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
 
   <style amp4email-boilerplate>
-    body {
-      visibility: hidden;
-    }
+    body { visibility: hidden; }
   </style>
 
   <style amp-custom>
-    body {
-      font-family: Arial;
-      background: #f8fafc;
-      padding: 20px;
-    }
-
-    .box {
-      max-width: 600px;
-      margin: auto;
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 10px;
-      border: 2px solid #652394;
-      text-align: center;
-    }
-
-    .input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-sizing: border-box;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 20px;
-      margin-top: 20px;
-      background: #178218;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    p {
-      color: #333;
-    }
+    body { font-family: Arial, sans-serif; background-color: #f8fafc; padding: 20px; }
+    .box { max-width: 600px; margin: 0 auto; background: #ffffff; padding: 20px; border-radius: 8px; }
+    .input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; box-sizing: border-box; }
+    .btn { padding: 14px; background-color: #22c55e; color: white; border: none; cursor: pointer; width: 100%; font-weight: bold; }
+    .success-msg { color: #16a34a; font-weight: bold; }
+    .error-msg { color: #dc2626; font-weight: bold; }
   </style>
 </head>
 
 <body>
-
   <div class="box">
+    <h2>Complete Your Application</h2>
 
-    <h2>🚀 Complete Your Application</h2>
+    <form method="post"
+      action-xhr="${baseUrl}/track/form-amp/${trackingId}">
 
-    <p>Fill the form below and submit your details.</p>
+      <label for="name">Name</label>
+      <input class="input" type="text" name="name" id="name" required>
+      
+      <label for="email">Email</label>
+      <input class="input" type="email" name="email" id="email" required>
 
-    <form
-      method="post"
-      target="_top"
-      action-xhr="${baseUrl}/track/form-amp/${trackingId}"
-    >
+      <input type="hidden" name="trackingId" value="${trackingId}">
 
-      <input
-        class="input"
-        type="text"
-        name="name"
-        placeholder="Enter Your Name"
-        required
-      >
-
-      <input
-        class="input"
-        type="email"
-        name="email"
-        placeholder="Enter Your Email"
-        required
-      >
-
-      <input
-        type="hidden"
-        name="trackingId"
-        value="${trackingId}"
-      >
-
-      <button class="btn" type="submit">
-        Submit
-      </button>
+      <button class="btn" type="submit">Submit Application</button>
 
       <div submit-success>
         <template type="amp-mustache">
-          <p style="color:green;margin-top:20px;">
-            Form submitted successfully ✅
-          </p>
+          <p class="success-msg">Success! Your application has been received. ✅</p>
         </template>
       </div>
 
       <div submit-error>
         <template type="amp-mustache">
-          <p style="color:red;margin-top:20px;">
-            Submission failed ❌
-          </p>
+          <p class="error-msg">Submission failed. Please try again or visit our website. ❌</p>
         </template>
       </div>
-
     </form>
 
-    <!-- AMP OPEN TRACKING -->
-    <amp-img
-      src="${baseUrl}/track/open-amp/${trackingId}"
-      width="1"
-      height="1"
-      layout="fixed"
-      alt=""
-    >
-    </amp-img>
-
+    <!-- Corrected tracking pixel for AMP -->
+    <amp-img src="${baseUrl}/track/open-amp/${trackingId}" 
+             width="1" 
+             height="1" 
+             layout="fixed"
+             alt=""></amp-img>
   </div>
-
 </body>
 </html>
 `;
 };
-
-export default ampTemplate;
