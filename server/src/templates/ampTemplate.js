@@ -71,3 +71,5 @@ const ampTemplate = (trackingId) => {
 </html>
 `;
 };
+
+export default ampTemplate;
