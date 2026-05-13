@@ -195,6 +195,7 @@ const ampWebTemplate = (trackingId) => {
         method="post"
         action-xhr="${baseUrl}/track/form-html/${trackingId}"
         target="_top"
+        enctype="application/x-www-form-urlencoded"
       >
 
         <div class="overall">

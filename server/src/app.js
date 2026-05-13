@@ -14,6 +14,8 @@ app.use(express.urlencoded({
    extended: true
 }));
 
+app.use(express.text());
+
 app.set("trust proxy", true);
 
 /* CUSTOM CORS */
