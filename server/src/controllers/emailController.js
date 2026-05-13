@@ -6,7 +6,11 @@ async (req, res) => {
 
    try {
 
-      const { email } = req.body;
+      const {
+         email,
+         campaignName,
+         campaignType
+      } = req.body;
 
       if (!email) {
 
@@ -17,7 +21,11 @@ async (req, res) => {
 
       }
 
-      await sendTrackingEmail(email);
+      await sendTrackingEmail(
+         email,
+         campaignName,
+         campaignType
+      );
 
       res.json({
          success: true,
@@ -36,4 +44,3 @@ async (req, res) => {
    }
 
 };
-
