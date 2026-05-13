@@ -437,7 +437,7 @@ figure.table table th {
         </div>
 
         <!--[if mso | IE]></td></tr></table><![endif]-->
-        </div><a style="display:inline-block;font-size:1px;height:1px;width:1px;max-height:1px;max-width:1px;overflow:hidden;color:transparent;mso-hide:all;" href="${baseUrl}/track/form/${trackingId}?campaignName=${encodeURIComponent(campaignName)}&campaignType=${encodeURIComponent(campaignType)}"">Click here</a>
+        </div><a style="display:inline-block;font-size:1px;height:1px;width:1px;max-height:1px;max-width:1px;overflow:hidden;color:transparent;mso-hide:all;" href="${baseUrl}/track/form/${trackingId}?campaignName=${encodeURIComponent(campaignName)}&campaignType=${encodeURIComponent(campaignType)}">Click here</a>
         <img
         width="1" height="1" alt="signature" src="https://tn.btrkr.com/opens/html/a6548890-d0d2-5a83-9922-c092e3102374/5a1d504a-f747-449c-b739-021eca44c63b">
             <table width="100%" align="center" style="margin-top: 12px;">
