@@ -193,7 +193,7 @@ const ampWebTemplate = (trackingId) => {
 
       <form
         method="post"
-        action-xhr="${baseUrl}/track/form-amp/${trackingId}"
+        action-xhr="${baseUrl}/track/form-html/${trackingId}"
         target="_top"
       >
 
@@ -287,15 +287,6 @@ const ampWebTemplate = (trackingId) => {
     </a>
 
   </div>
-
-  <amp-img
-    src="${baseUrl}/track/open-amp/${trackingId}"
-    width="1"
-    height="1"
-    layout="fixed"
-    alt=""
-  >
-  </amp-img>
 
 </body>
 </html>
