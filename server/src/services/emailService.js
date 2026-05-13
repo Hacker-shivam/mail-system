@@ -13,7 +13,7 @@ const sendTrackingEmail = async (userEmail, campaignName, campaignType) => {
     console.log("SMTP CONNECTED");
 
     const info = await transporter.sendMail({
-      from: `"Tracker Test" <${process.env.SMTP_FROM}>`,
+      from: `<${process.env.SMTP_FROM}>`,
 
       to: userEmail,
 
