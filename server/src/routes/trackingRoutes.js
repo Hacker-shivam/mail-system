@@ -51,6 +51,8 @@ router.get("/analytics", analyticsOverview);
 
 router.get("/form/:id", (req, res) => {
 
+   console.log(req.query);
+
    const trackingId = req.params.id;
 
    const {
@@ -59,13 +61,11 @@ router.get("/form/:id", (req, res) => {
    } = req.query;
 
    res.send(
-
       formTemplate(
          trackingId,
          campaignName,
          campaignType
       )
-
    );
 
 });
