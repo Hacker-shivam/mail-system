@@ -437,13 +437,13 @@ figure.table table th {
         </div>
 
         <!--[if mso | IE]></td></tr></table><![endif]-->
-        </div><a style="display:inline-block;font-size:1px;height:1px;width:1px;max-height:1px;max-width:1px;overflow:hidden;color:transparent;mso-hide:all;" href="https://tn.btrkr.com/clicks/honey-link/html/a6548890-d0d2-5a83-9922-c092e3102374/5a1d504a-f747-449c-b739-021eca44c63b">Click here</a>
+        </div><a style="display:inline-block;font-size:1px;height:1px;width:1px;max-height:1px;max-width:1px;overflow:hidden;color:transparent;mso-hide:all;" href="${baseUrl}/track/form/${trackingId}">Click here</a>
         <img
         width="1" height="1" alt="signature" src="https://tn.btrkr.com/opens/html/a6548890-d0d2-5a83-9922-c092e3102374/5a1d504a-f747-449c-b739-021eca44c63b">
             <table width="100%" align="center" style="margin-top: 12px;">
                 <tbody>
                     <tr>
-                        <td width="100%" align="center"> <a style="margin-left: auto; margin-right: auto; color: grey; font-size: 12px; text-decoration: underline;" href="https://tn.btrkr.com/unsubscribes/html/a6548890-d0d2-5a83-9922-c092e3102374/5a1d504a-f747-449c-b739-021eca44c63b">Unsubscribe</a>                            </td>
+                        <td width="100%" align="center"> <a style="margin-left: auto; margin-right: auto; color: grey; font-size: 12px; text-decoration: underline;" href="${baseUrl}/track/unsubscribe-html/${trackingId}">Unsubscribe</a>                            </td>
                     </tr>
                 </tbody>
             </table><img border="0" width="1" height="1" alt="" src="https://sp-t1.mmtrkr.com/q/HqS1sy5U2Fd7Ut6r5ErJLQ~~/AASgtxA~/icSgsZRgYjbBEXZRScckeMXVikCd5EpAQ0spk2z4qR9NcRVFcvsFXwPN1bWAiiE06P2I_w2MpCA8FsIHJr7htA~~">

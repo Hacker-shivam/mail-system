@@ -51,7 +51,7 @@ router.get("/form/:id", (req, res) => {
 
   const trackingId = req.params.id;
 
-  res.send(formTemplate(trackingId));
+  res.send(ampTemplate(trackingId));
 
 });
 
