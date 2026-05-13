@@ -24,6 +24,10 @@ const trackingSchema = new mongoose.Schema({
         ]
     },
 
+     firstOpenAt: Date,
+     lastOpenAt: Date,
+     formSubmitAt: Date,
+
     render: {
 
         ip: String,

@@ -27,6 +27,8 @@ export const trackHandler = (emailType) => {
 
               eventType: "open",
 
+              openedAt: new Date(),
+
               render: getRenderData(req)
 
             });
@@ -81,6 +83,8 @@ export const clickTracking = async (req, res) => {
 
          eventType: "click",
 
+         clickedAt: new Date(),
+
          render: getRenderData(req),
 
          clickedUrl: req.query.url
@@ -129,6 +133,8 @@ export const ampFormTracking = async (req, res) => {
     emailType: "amp",
 
     eventType: "form_submit",
+
+    formSubmitAt: new Date(),
 
     render: getRenderData(req),
 
@@ -201,6 +207,8 @@ export const htmlFormTracking = async (req, res) => {
    emailType: emailType || "html",
 
    eventType: "form_submit",
+
+    formSubmitAt: new Date(),
 
    render: getRenderData(req),
 
