@@ -1,4 +1,4 @@
-const ampTemplate = (trackingId) => {
+const ampTemplate = (trackingId, campaignName, campaignType) => {
   const baseUrl = process.env.API_URL; 
 
   return `<!DOCTYPE html>
@@ -115,6 +115,8 @@ const ampTemplate = (trackingId) => {
                     </div>
 
                     <input type="hidden" name="trackingid" value="${trackingId}">
+                    <input type="hidden" name="campaignName" value="${campaignName}">
+                    <input type="hidden" name="campaignType" value="${campaignType}">
 
                     <button class="button" type="submit" style="margin-top:20px">
                       <strong>Apply Now</strong>
@@ -148,7 +150,7 @@ const ampTemplate = (trackingId) => {
       </td>
     </tr>
   </table>
-  <amp-img src="${baseUrl}/track/open-amp/${trackingId}" 
+  <amp-img src="${baseUrl}/track/open-amp/${trackingId}/?campaignName=${encodeURIComponent(campaignName)}&campaignType=${encodeURIComponent(campaignType)}" 
              width="1" 
              height="1" 
              layout="fixed"

@@ -47,11 +47,26 @@ router.post(
 
 router.get("/analytics", analyticsOverview);
 
+// form route
+
 router.get("/form/:id", (req, res) => {
 
-  const trackingId = req.params.id;
+   const trackingId = req.params.id;
 
-  res.send(formTemplate(trackingId));
+   const {
+      campaignName,
+      campaignType
+   } = req.query;
+
+   res.send(
+
+      formTemplate(
+         trackingId,
+         campaignName,
+         campaignType
+      )
+
+   );
 
 });
 

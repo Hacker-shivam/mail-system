@@ -15,17 +15,21 @@ export const trackHandler = (emailType) => {
 
          await Tracking.create({
 
-            trackingId: req.params.id,
+              trackingId: req.params.id,
 
-            email,
+              email,
 
-            emailType,
+              campaignName: req.query.campaignName,
 
-            eventType: "open",
+              campaignType: req.query.campaignType,
 
-            render: getRenderData(req)
+              emailType,
 
-         });
+              eventType: "open",
+
+              render: getRenderData(req)
+
+            });
 
          const pixel = Buffer.from(
             "R0lGODlhAQABAAAAACwAAAAAAQABAAA=",
@@ -66,10 +70,14 @@ export const clickTracking = async (req, res) => {
          .toString();
 
       await Tracking.create({
-
+      
          trackingId: req.params.id,
-
+      
          email,
+
+         campaignName: req.query.campaignName,
+
+         campaignType: req.query.campaignType,
 
          eventType: "click",
 
@@ -101,17 +109,34 @@ export const ampFormTracking = async (req, res) => {
 
     const email = Buffer.from(trackingId, "base64").toString();
 
-    const { emailType, ...formData } = req.body;
+    const {
+    emailType,
+    campaignName,
+    campaignType,
+   ...formData
+    } = req.body;
 
     await Tracking.create({
-      trackingId,
-      email,
-      emailType: "amp",
-      eventType: "form_submit",
-      render: getRenderData(req),
-      formSubmission: formData,
-      createdAt: new Date()
-    });
+
+    trackingId,
+
+    email,
+
+    campaignName,
+
+    campaignType,
+
+    emailType: "amp",
+
+    eventType: "form_submit",
+
+    render: getRenderData(req),
+
+    formSubmission: formData,
+
+    createdAt: new Date()
+
+  });
 
     return res.json({
       success: true,
@@ -157,28 +182,33 @@ export const htmlFormTracking = async (req, res) => {
     const body = req.body || {};
 
     const {
-      emailType,
-      ...formData
-    } = body;
+   emailType,
+   campaignName,
+   campaignType,
+   ...formData
+  } = body;
 
     await Tracking.create({
 
-      trackingId,
+   trackingId,
 
-      email,
+   email,
 
-      emailType: emailType || "html",
+   campaignName,
 
-      eventType: "form_submit",
+   campaignType,
 
-      render: getRenderData(req),
+   emailType: emailType || "html",
 
-      formSubmission: formData,
+   eventType: "form_submit",
 
-      createdAt: new Date()
+   render: getRenderData(req),
 
-    });
+   formSubmission: formData,
 
+   createdAt: new Date()
+
+});
     return res.json({
 
       success: true,

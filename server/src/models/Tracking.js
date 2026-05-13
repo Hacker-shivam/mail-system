@@ -6,6 +6,10 @@ const trackingSchema = new mongoose.Schema({
 
     email: String,
 
+    campaignName: String,
+
+    campaignType: String,
+
     emailType: {
         type: String,
         enum: ["html", "amp"]
