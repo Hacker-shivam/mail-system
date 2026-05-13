@@ -24,9 +24,20 @@ const trackingSchema = new mongoose.Schema({
         ]
     },
 
-     firstOpenAt: Date,
-     lastOpenAt: Date,
-     formSubmitAt: Date,
+     openedAt: {
+      type: Date,
+      default: null
+    },
+
+     clickedAt: {
+      type: Date,
+      default: null
+    },
+
+    formSubmitAt: {
+      type: Date,
+      default: null
+    },
 
     render: {
 
