@@ -1,5 +1,11 @@
-#nodemodules
-node_modules
-env
-logs
-hi
+# dependencies
+node_modules/
+server/node_modules/
+
+# environment files
+.env
+
+# logs
+logs/
+*.log
+
