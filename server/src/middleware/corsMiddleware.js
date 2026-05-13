@@ -31,6 +31,9 @@ const corsMiddleware = (req, res, next) => {
       "AMP-Access-Control-Allow-Source-Origin"
    );
 
+   
+   res.setHeader("Cache-Control", "no-store");
+  
    /* ---------------- PREFLIGHT ---------------- */
 
    if (req.method === "OPTIONS") {

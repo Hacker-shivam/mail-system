@@ -8,7 +8,7 @@ import {
 } from "../controllers/trackingController.js";
 
 import { analyticsOverview } from "../controllers/analyticsController.js";
-import formTemplate from "../templates/formTemplate.js";
+import formTemplate  from "../templates/formTemplate.js";
 
 const router = express.Router();
 
@@ -51,7 +51,7 @@ router.get("/form/:id", (req, res) => {
 
   const trackingId = req.params.id;
 
-  res.send(ampTemplate(trackingId));
+  res.send(formTemplate(trackingId));
 
 });
 
