@@ -133,37 +133,70 @@ export const ampFormTracking = async (req, res) => {
 /* HTML FORM */
 
 export const htmlFormTracking = async (req, res) => {
+
   try {
+
+    res.setHeader("Access-Control-Allow-Origin", "*");
+
+    res.setHeader(
+      "AMP-Access-Control-Allow-Source-Origin",
+      process.env.API_URL
+    );
+
+    res.setHeader(
+      "Access-Control-Expose-Headers",
+      "AMP-Access-Control-Allow-Source-Origin"
+    );
+
     const trackingId = req.params.id;
 
-    const email = Buffer.from(trackingId, "base64").toString();
+    const email = Buffer
+      .from(trackingId, "base64")
+      .toString();
 
-    const { emailType, ...formData } = req.body;
+    const body = req.body || {};
+
+    const {
+      emailType,
+      ...formData
+    } = body;
 
     await Tracking.create({
+
       trackingId,
+
       email,
-      emailType: "html",
+
+      emailType: emailType || "html",
+
       eventType: "form_submit",
+
       render: getRenderData(req),
+
       formSubmission: formData,
+
       createdAt: new Date()
+
     });
 
-    return res.send(`
-      <html>
-        <body style="font-family:Arial;text-align:center;padding:40px">
-          <h2 style="color:green">✅ Form Submitted Successfully</h2>
-          <p>You can close this window now.</p>
-        </body>
-      </html>
-    `);
+    return res.json({
+
+      success: true,
+
+      message: "✅ Form Submitted Successfully"
+
+    });
 
   } catch (err) {
+
     console.error("HTML FORM ERROR:", err);
 
-    return res.status(500).send(`
-      <h2 style="color:red">Form Tracking Error</h2>
-    `);
+    return res.status(500).json({
+
+      success: false,
+
+      message: "❌ Form Tracking Error"
+
+    });
   }
 };
