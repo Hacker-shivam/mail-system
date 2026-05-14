@@ -1,4 +1,5 @@
 import express from "express";
+import { unsubscribeHandler } from "../controllers/unsubscribeController.js";
 
 import {
    trackHandler,
@@ -70,6 +71,8 @@ router.get("/form/:id", (req, res) => {
 
 });
 
+
+router.get("/unsubscribe/:id", unsubscribeHandler );
 
 
 
