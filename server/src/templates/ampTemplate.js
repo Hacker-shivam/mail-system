@@ -147,7 +147,7 @@ const ampTemplate = (trackingId, campaignName, campaignType) => {
   <table width="100%" align="center" style="margin-top: 12px;">
     <tr>
       <td align="center">
-        <a style="color: grey; font-size: 12px; text-decoration: underline;" href="https://insights.startupflora.co/api/v1/webhooks/mail/unsubscribe">Unsubscribe</a>
+        <a style="color: grey; font-size: 12px; text-decoration: underline;" href="${baseUrl}/track/unsubscribe/${trackingId}">Unsubscribe</a>
       </td>
     </tr>
   </table>
