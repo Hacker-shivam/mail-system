@@ -200,14 +200,16 @@ const ampWebTemplate = (trackingId, campaignName, campaignType) => {
     </amp-state>
 
       <form
-        method="post"
-        action-xhr="${baseUrl}/track/form-html/${trackingId}"
-        target="_top"
-        enctype="application/x-www-form-urlencoded"
-        on="submit-success:AMP.setState({
-          formjh3103: {
-          currentStep: 'thankyou'
-        }})"
+         method="post"
+         action-xhr="${baseUrl}/track/form-html/${trackingId}"
+         target="_top"
+         enctype="application/x-www-form-urlencoded"
+         [hidden]="formjh3103.currentStep == 'thankyou'"
+         on="submit-success:AMP.setState({
+         formjh3103: {
+         currentStep: 'thankyou'
+         }
+     })"
       >
 
         <div class="overall" [hidden]="formjh3103.currentStep != 'stepk1jrs1'" >
@@ -282,19 +284,17 @@ const ampWebTemplate = (trackingId, campaignName, campaignType) => {
       </form>
 
       <div
-        class="overall"
-        [hidden]="formjh3103.currentStep != 'thankyou'"
-        >
+       class="overall" hidden [hidden]="formjh3103.currentStep != 'thankyou'" >
 
-      <h2 style="text-align:center;color:#178218">
-         Thank You!
-      </h2>
+        <h2 style="text-align:center;color:#178218">
+          Thank You!
+        </h2>
 
-      <p style="text-align:center;margin-top:10px">
-          Your form has been submitted successfully.
-       </p>
+        <p style="text-align:center;margin-top:10px">
+           Your form has been submitted successfully.
+        </p>
 
-    </div>
+      </div>
 
     </div>
 
