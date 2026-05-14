@@ -1,4 +1,4 @@
-import Tracking from "../models/Tracking";
+import Tracking from "../models/Tracking.js";
 
 export const unsubscribeHandler = async (req, res) => {
 
