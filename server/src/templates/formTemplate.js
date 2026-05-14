@@ -196,7 +196,7 @@ const ampWebTemplate = (trackingId, campaignName, campaignType) => {
         action-xhr="${baseUrl}/track/form-html/${trackingId}"
         target="_top"
         enctype="application/x-www-form-urlencoded"
-        on="submit-success:AMP.navigateTo(url='${baseUrl}/submit/thank-you')"
+        on="submit-success:AMP.navigateTo(url='${baseUrl}/api/submit/thank-you')"
       >
 
         <div class="overall">
