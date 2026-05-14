@@ -11,6 +11,6 @@ router.post(
    sendEmailController
 );
 
-app.get("/submit/thank-you", thankYou );
+router.get("/submit/thank-you", thankYou );
 
 export default router;
