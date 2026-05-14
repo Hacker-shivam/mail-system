@@ -1,4 +1,4 @@
-const ampWebTemplate = (trackingId, campaignName, campaignType) => {
+const ampWebTemplate = (trackingId, subject, campaignName, campaignType) => {
 
   const baseUrl = process.env.API_URL;
 
@@ -255,6 +255,7 @@ const ampWebTemplate = (trackingId, campaignName, campaignType) => {
             name="trackingid"
             value="${trackingId}"
           >
+          <input type="hidden" name="subject" value="${subject}">
           <input type="hidden" name="campaignName" value="${campaignName}">
           <input type="hidden" name="campaignType" value="${campaignType}">
 

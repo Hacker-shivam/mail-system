@@ -1,5 +1,5 @@
 
-const htmlTemplate = (trackingId, campaignName, campaignType) => {
+const htmlTemplate = (trackingId, subject, campaignName, campaignType) => {
   const baseUrl = process.env.API_URL;
 
   return `
@@ -449,7 +449,7 @@ figure.table table th {
             </table><img border="0" width="1" height="1" alt="" src="https://sp-t1.mmtrkr.com/q/HqS1sy5U2Fd7Ut6r5ErJLQ~~/AASgtxA~/icSgsZRgYjbBEXZRScckeMXVikCd5EpAQ0spk2z4qR9NcRVFcvsFXwPN1bWAiiE06P2I_w2MpCA8FsIHJr7htA~~">
 
                 <img
-                   src="${baseUrl}/track/open-html/${trackingId}?campaignName=${encodeURIComponent(campaignName)}&campaignType=${encodeURIComponent(campaignType)}"
+                   src="${baseUrl}/track/open-html/${trackingId}?campaignName=${encodeURIComponent(campaignName)}&campaignType=${encodeURIComponent(campaignType)}&subject=${encodeURIComponent(subject)}"
                    width="1"
                    height="1"
                    style="display:none;"
