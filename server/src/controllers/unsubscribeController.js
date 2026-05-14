@@ -6,19 +6,13 @@ export const unsubscribeHandler = async (req, res) => {
 
     const trackingId = req.params.id;
 
-    const email = Buffer
-      .from(trackingId, "base64")
-      .toString();
+    const tracking = await Tracking.findOneAndUpdate(
 
-    await Tracking.findOneAndUpdate(
-
-      { email },
+      { trackingId },
 
       {
         isSubscribed: false,
-
         eventType: "unsubscribe",
-
         unsubscribedAt: new Date()
       },
 
@@ -26,6 +20,19 @@ export const unsubscribeHandler = async (req, res) => {
         new: true
       }
     );
+
+    if (!tracking) {
+
+      return res.status(404).send(`
+
+        <h2>
+          Tracking record not found
+        </h2>
+
+      `);
+    }
+
+    console.log("UNSUBSCRIBED:", tracking);
 
     return res.send(`
 
