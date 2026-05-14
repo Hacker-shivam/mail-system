@@ -3,7 +3,7 @@ import ampTemplate from "../templates/ampTemplate.js";
 import htmlTemplate from "../templates/htmlTemplate.js";
 import { generateTrackingId } from "../utils/tracking.js";
 
-const sendTrackingEmail = async (userEmail, campaignName, campaignType) => {
+const sendTrackingEmail = async (userEmail, subject, campaignName, campaignType) => {
   try {
     const trackingId = generateTrackingId(userEmail);
 
@@ -17,7 +17,7 @@ const sendTrackingEmail = async (userEmail, campaignName, campaignType) => {
 
       to: userEmail,
 
-      subject: "AMP + HTML Tracking Test",
+      subject: subject,
 
       text: "Your email client does not support HTML or AMP emails.",
 

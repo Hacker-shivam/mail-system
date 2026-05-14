@@ -8,6 +8,7 @@ async (req, res) => {
 
       const {
          email,
+         subject,
          campaignName,
          campaignType
       } = req.body;
@@ -23,6 +24,7 @@ async (req, res) => {
 
       await sendTrackingEmail(
          email,
+         subject,
          campaignName,
          campaignType
       );

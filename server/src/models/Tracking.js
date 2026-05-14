@@ -17,6 +17,8 @@ const trackingSchema = new mongoose.Schema(
 
     campaignType: String,
 
+    subject: String,
+
     emailType: {
 
       type: String,

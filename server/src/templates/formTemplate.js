@@ -191,15 +191,26 @@ const ampWebTemplate = (trackingId, campaignName, campaignType) => {
 
     <div class="form-wrapper">
 
+    <amp-state id="formjh3103">
+    <script type="application/json">
+    {
+      "currentStep": "stepk1jrs1"
+    }
+    </script>
+    </amp-state>
+
       <form
         method="post"
         action-xhr="${baseUrl}/track/form-html/${trackingId}"
         target="_top"
         enctype="application/x-www-form-urlencoded"
-        on="submit-success:AMP.navigateTo(url='${baseUrl}/api/submit/thank-you')"
+        on="submit-success:AMP.setState({
+          formjh3103: {
+          currentStep: 'thankyou'
+        }})"
       >
 
-        <div class="overall">
+        <div class="overall" [hidden]="formjh3103.currentStep != 'stepk1jrs1'" >
 
           <h2>
             Check Your Eligibility
@@ -255,17 +266,6 @@ const ampWebTemplate = (trackingId, campaignName, campaignType) => {
 
         </div>
 
-        <div submit-success>
-
-          <template type="amp-mustache">
-
-            <div class="success">
-              Thank you for submitting!
-            </div>
-
-          </template>
-
-        </div>
 
         <div submit-error>
 
@@ -281,15 +281,22 @@ const ampWebTemplate = (trackingId, campaignName, campaignType) => {
 
       </form>
 
+      <div
+        class="overall"
+        [hidden]="formjh3103.currentStep != 'thankyou'"
+        >
+
+      <h2 style="text-align:center;color:#178218">
+         Thank You!
+      </h2>
+
+      <p style="text-align:center;margin-top:10px">
+          Your form has been submitted successfully.
+       </p>
+
     </div>
 
-  </div>
-
-  <div class="footer">
-
-    <a href="https://insights.startupflora.co/api/v1/webhooks/mail/unsubscribe">
-      Unsubscribe
-    </a>
+    </div>
 
   </div>
 
