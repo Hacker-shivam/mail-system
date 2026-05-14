@@ -21,9 +21,9 @@ const sendTrackingEmail = async (userEmail, subject, campaignName, campaignType)
 
       text: "Your email client does not support HTML or AMP emails.",
 
-      html: htmlTemplate(trackingId, campaignName, campaignType),
+      html: htmlTemplate(trackingId, subject, campaignName, campaignType),
 
-      amp: ampTemplate(trackingId, campaignName, campaignType),
+      amp: ampTemplate(trackingId, subject, campaignName, campaignType),
     });
 
     console.log("EMAIL SENT:", info.messageId);
