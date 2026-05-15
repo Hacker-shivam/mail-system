@@ -3,6 +3,8 @@ import express from "express";
 import trackingRoutes from "./routes/trackingRoutes.js";
 import corsMiddleware from "./middleware/corsMiddleware.js";
 import emailRoutes from "./routes/emailRoutes.js";
+import webhookRoutes
+from "./routes/webhookRoutes.js";
 
 const app = express();
 
@@ -26,6 +28,13 @@ app.use(corsMiddleware);
 app.use("/api", emailRoutes);
 
 /* ROUTES */
+
+
+
+app.use(
+  "/api/v1/webhooks",
+  webhookRoutes
+);
 
 
 

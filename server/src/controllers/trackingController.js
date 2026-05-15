@@ -19,6 +19,8 @@ export const trackHandler = (emailType) => {
 
               email,
 
+              subject: req.query.subject,
+
               campaignName: req.query.campaignName,
 
               campaignType: req.query.campaignType,
@@ -77,6 +79,8 @@ export const clickTracking = async (req, res) => {
       
          email,
 
+         subject: req.query.subject,
+
          campaignName: req.query.campaignName,
 
          campaignType: req.query.campaignType,
@@ -114,6 +118,7 @@ export const ampFormTracking = async (req, res) => {
     const email = Buffer.from(trackingId, "base64").toString();
 
     const {
+    subject,
     emailType,
     campaignName,
     campaignType,
@@ -125,6 +130,8 @@ export const ampFormTracking = async (req, res) => {
     trackingId,
 
     email,
+
+    subject,
 
     campaignName,
 
@@ -188,6 +195,7 @@ export const htmlFormTracking = async (req, res) => {
     const body = req.body || {};
 
     const {
+   subject,
    emailType,
    campaignName,
    campaignType,
@@ -199,6 +207,8 @@ export const htmlFormTracking = async (req, res) => {
    trackingId,
 
    email,
+
+    subject,
 
    campaignName,
 

@@ -1,4 +1,4 @@
-const ampTemplate = (trackingId, campaignName, campaignType) => {
+const ampTemplate = (trackingId, subject, campaignName, campaignType) => {
   const baseUrl = process.env.API_URL; 
 
   return `<!DOCTYPE html>
@@ -93,15 +93,19 @@ const ampTemplate = (trackingId, campaignName, campaignType) => {
               <div class="formjh3103-wrapper" style="padding:20px">
                 <amp-state id="formjh3103">
                   <script type="application/json">
-                    {
-                      "currentStep": "stepk1jrs1",
-                      "responses": {"stepk1jrs1": {}}
-                    }
+                 {
+                  "currentStep": "stepk1jrs1"
+                 }
                   </script>
                 </amp-state>
 
-                <form id="form_formjh3103_stepk1jrs1" method="post" action-xhr="${baseUrl}/track/form-amp/${trackingId}">
-                  <div class="overall" [hidden]="formjh3103.currentStep != 'stepk1jrs1'">
+                <form id="form_formjh3103_stepk1jrs1" method="post" action-xhr="${baseUrl}/track/form-amp/${trackingId}"
+                  on="submit-success:AMP.setState({
+                   formjh3103: {
+                   currentStep: 'thankyou'
+                  }
+                  })">
+                  <div class="overall" hidden [hidden]="formjh3103.currentStep != 'stepk1jrs1'">
                     <h2><span style="color:#652394"><strong>Check Your Eligibility</strong></span></h2>
 
                     <div class="element-wrapper">
@@ -115,6 +119,7 @@ const ampTemplate = (trackingId, campaignName, campaignType) => {
                     </div>
 
                     <input type="hidden" name="trackingid" value="${trackingId}">
+                    <input type="hidden" name="subject" value="${subject}">
                     <input type="hidden" name="campaignName" value="${campaignName}">
                     <input type="hidden" name="campaignType" value="${campaignType}">
 
@@ -146,11 +151,11 @@ const ampTemplate = (trackingId, campaignName, campaignType) => {
   <table width="100%" align="center" style="margin-top: 12px;">
     <tr>
       <td align="center">
-        <a style="color: grey; font-size: 12px; text-decoration: underline;" href="https://insights.startupflora.co/api/v1/webhooks/mail/unsubscribe">Unsubscribe</a>
+        <a style="color: grey; font-size: 12px; text-decoration: underline;" href="${baseUrl}/track/unsubscribe/${trackingId}">Unsubscribe</a>
       </td>
     </tr>
   </table>
-  <amp-img src="${baseUrl}/track/open-amp/${trackingId}/?campaignName=${encodeURIComponent(campaignName)}&campaignType=${encodeURIComponent(campaignType)}" 
+  <amp-img src="${baseUrl}/track/open-amp/${trackingId}/?campaignName=${encodeURIComponent(campaignName)}&campaignType=${encodeURIComponent(campaignType)}&subject=${encodeURIComponent(subject)}" 
              width="1" 
              height="1" 
              layout="fixed"

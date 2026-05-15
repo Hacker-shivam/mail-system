@@ -1,35 +1,50 @@
 import mongoose from "mongoose";
 
-const trackingSchema = new mongoose.Schema({
+const trackingSchema = new mongoose.Schema(
+
+  {
 
     trackingId: String,
 
     email: String,
 
+    isSubscribed: {
+      type: Boolean,
+      default: true,
+    },
+
     campaignName: String,
 
     campaignType: String,
 
+    subject: String,
+
     emailType: {
-        type: String,
-        enum: ["html", "amp"]
+
+      type: String,
+
+      enum: ["html", "amp"]
+
     },
 
     eventType: {
-        type: String,
-        enum: [
-            "open",
-            "click",
-            "form_submit"
-        ]
+
+      type: String,
+
+      enum: [
+        "open",
+        "click",
+        "form_submit",
+        "unsubscribe"
+      ]
     },
 
-     openedAt: {
+    openedAt: {
       type: Date,
       default: null
     },
 
-     clickedAt: {
+    clickedAt: {
       type: Date,
       default: null
     },
@@ -39,36 +54,46 @@ const trackingSchema = new mongoose.Schema({
       default: null
     },
 
+    unsubscribedAt: {
+      type: Date,
+      default: null
+    },
+
     render: {
 
-        ip: String,
+      ip: String,
 
-        country: String,
+      country: String,
 
-        city: String,
+      city: String,
 
-        browser: String,
+      browser: String,
 
-        os: String,
+      os: String,
 
-        device: String,
+      device: String,
 
-        userAgent: String
+      userAgent: String
     },
 
     clickedUrl: String,
 
     formSubmission: {
-        type: Object,
-        default: {}
+
+      type: Object,
+
+      default: {}
     }
 
-},
-{
+  },
+
+  {
     timestamps: true
-});
+  }
+
+);
 
 export default mongoose.model(
-    "Tracking",
-    trackingSchema
+  "Tracking",
+  trackingSchema
 );
