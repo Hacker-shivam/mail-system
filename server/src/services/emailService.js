@@ -19,6 +19,10 @@ const sendTrackingEmail = async (userEmail, subject, campaignName, campaignType)
 
       subject: subject,
 
+      headers: {
+         "X-Tracking-ID": trackingId
+      },
+
       text: "Your email client does not support HTML or AMP emails.",
 
       html: htmlTemplate(trackingId, subject, campaignName, campaignType),

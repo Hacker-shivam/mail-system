@@ -93,16 +93,19 @@ const ampTemplate = (trackingId, subject, campaignName, campaignType) => {
               <div class="formjh3103-wrapper" style="padding:20px">
                 <amp-state id="formjh3103">
                   <script type="application/json">
-                    {
-                      "currentStep": "stepk1jrs1",
-                      "responses": {"stepk1jrs1": {}}
-                    }
+                 {
+                  "currentStep": "stepk1jrs1"
+                 }
                   </script>
                 </amp-state>
 
                 <form id="form_formjh3103_stepk1jrs1" method="post" action-xhr="${baseUrl}/track/form-amp/${trackingId}"
-                  on="submit-success:AMP.navigateTo(url='${baseUrl}/api/submit/thank-you')">
-                  <div class="overall" [hidden]="formjh3103.currentStep != 'stepk1jrs1'">
+                  on="submit-success:AMP.setState({
+                   formjh3103: {
+                   currentStep: 'thankyou'
+                  }
+                  })">
+                  <div class="overall" hidden [hidden]="formjh3103.currentStep != 'stepk1jrs1'">
                     <h2><span style="color:#652394"><strong>Check Your Eligibility</strong></span></h2>
 
                     <div class="element-wrapper">
