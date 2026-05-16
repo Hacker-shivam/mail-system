@@ -10,6 +10,23 @@ const mailEventSchema = new mongoose.Schema({
 
   messageId: String,
 
+  render: {
+
+    ip: String,
+
+    country: String,
+
+    city: String,
+
+    browser: String,
+
+    os: String,
+
+    device: String,
+
+    userAgent: String
+  },
+
   payload: Object
 
 }, {

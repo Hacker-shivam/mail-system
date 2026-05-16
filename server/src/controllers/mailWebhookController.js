@@ -1,4 +1,4 @@
-import Tracking from "../models/Tracking.js";
+import MailEvent from "../models/MailEvent.js";
 import getRenderData from "../utils/renderData.js";
 
 export const mailDeliveryWebhook =
@@ -8,37 +8,45 @@ async (req, res) => {
 
     console.log("WEBHOOK:", req.body);
 
+    const body =
+      typeof req.body === "object" && req.body !== null
+        ? req.body
+        : {};
+
     const event =
-      req.body.event ||
-      req.body.type;
+      body.event ||
+      body.type ||
+      body.status;
 
     const email =
-      req.body.email ||
-      req.body.recipient;
+      body.email ||
+      body.recipient ||
+      body.to;
 
     const messageId =
-      req.body.messageId ||
-      req.body["message-id"];
+      body.messageId ||
+      body.message_id ||
+      body["message-id"];
 
     const trackingId =
-      req.body.trackingId ||
-      req.body.headers?.["x-tracking-id"];
+      body.trackingId ||
+      body.tracking_id ||
+      body.headers?.["x-tracking-id"] ||
+      body.headers?.["X-Tracking-Id"];
 
-    await Tracking.create({
+    await MailEvent.create({
 
       trackingId,
 
       email,
 
-      eventType: event,
+      event,
 
       messageId,
 
       render: getRenderData(req),
 
-      payload: req.body,
-
-      createdAt: new Date()
+      payload: body
 
     });
 
