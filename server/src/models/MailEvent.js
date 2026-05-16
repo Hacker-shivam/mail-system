@@ -27,7 +27,7 @@ const mailEventSchema = new mongoose.Schema({
     userAgent: String
   },
 
-  payload: Object
+  payload: mongoose.Schema.Types.Mixed
 
 }, {
   timestamps: true
