@@ -27,6 +27,34 @@ const trackingSchema = new mongoose.Schema(
 
     },
 
+    messageId: String,
+
+    // Mail delivery status (filled by mail provider webhooks)
+    deliveryStatus: {
+      type: String,
+      enum: [
+        "delivered",
+        "bounced",
+        "dropped",
+        "deferred",
+        "failed",
+        "accepted",
+        "rejected",
+        null
+      ],
+      default: null
+    },
+
+    deliveryAt: {
+      type: Date,
+      default: null
+    },
+
+    deliveryResponse: {
+      type: String,
+      default: null
+    },
+
     eventType: {
 
       type: String,
