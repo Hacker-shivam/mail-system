@@ -63,7 +63,7 @@ export const trackHandler = (emailType) => {
 
 };
 
-/* CLICK TRACKING */
+/* AMP CLICK TRACKING */
 
 export const clickTracking = async (req, res) => {
 
