@@ -25,7 +25,7 @@ router.get(
    trackHandler("amp")
 );
 
-/* CLICK */
+// HTML click tracking
 
 router.get(
    "/click/:id",

@@ -63,7 +63,8 @@ export const trackHandler = (emailType) => {
 
 };
 
-/* AMP CLICK TRACKING */
+
+// HTML CLICK TRACKING
 
 export const clickTracking = async (req, res) => {
 
@@ -124,6 +125,34 @@ export const ampFormTracking = async (req, res) => {
     campaignType,
    ...formData
     } = req.body;
+
+
+     // CLICK TRACKING
+    await Tracking.create({
+
+      trackingId,
+
+      email,
+
+      subject,
+
+      campaignName,
+
+      campaignType,
+
+      emailType: "amp",
+
+      eventType: "click",
+
+      clickedAt: new Date(),
+
+      render: getRenderData(req),
+
+      clickedUrl: "AMP Submit Button",
+
+      createdAt: new Date()
+
+    });
 
     await Tracking.create({
 
