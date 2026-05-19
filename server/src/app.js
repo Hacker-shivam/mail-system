@@ -5,18 +5,24 @@ import corsMiddleware from "./middleware/corsMiddleware.js";
 import emailRoutes from "./routes/emailRoutes.js";
 import webhookRoutes
 from "./routes/webhookRoutes.js";
+import templateRoutes from "./routes/templateRoutes.js";
 
 const app = express();
 
 /* MIDDLEWARE */
 
-app.use(express.json());
-
-app.use(express.urlencoded({
-   extended: true
+app.use(express.json({
+   limit: "5mb"
 }));
 
-app.use(express.text());
+app.use(express.urlencoded({
+   extended: true,
+   limit: "5mb"
+}));
+
+app.use(express.text({
+   limit: "5mb"
+}));
 
 app.set("trust proxy", true);
 
@@ -26,6 +32,9 @@ app.use(corsMiddleware);
 
 // email routes
 app.use("/api", emailRoutes);
+
+// template routes
+app.use("/api/templates", templateRoutes);
 
 /* ROUTES */
 

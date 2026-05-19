@@ -10,7 +10,10 @@ async (req, res) => {
          email,
          subject,
          campaignName,
-         campaignType
+         campaignType,
+         templateId,
+         templateSlug,
+         variables
       } = req.body;
 
       if (!email) {
@@ -26,7 +29,12 @@ async (req, res) => {
          email,
          subject,
          campaignName,
-         campaignType
+         campaignType,
+         {
+            templateId,
+            templateSlug,
+            variables
+         }
       );
 
       res.json({
