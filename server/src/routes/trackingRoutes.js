@@ -10,6 +10,8 @@ import {
 
 import { analyticsOverview } from "../controllers/analyticsController.js";
 import formTemplate  from "../templates/formTemplate.js";
+import AmpTemplate from "../models/AmpTemplate.js";
+import { renderTrackedFormTemplate } from "../utils/generateAmpTemplate.js";
 
 const router = express.Router();
 
@@ -50,24 +52,70 @@ router.get("/analytics", analyticsOverview);
 
 // form route
 
-router.get("/form/:id", (req, res) => {
+router.get("/form/:id", async (req, res) => {
 
    console.log(req.query);
 
    const trackingId = req.params.id;
 
    const {
+      subject,
       campaignName,
-      campaignType
+      campaignType,
+      templateId,
+      templateSlug
    } = req.query;
 
-   res.send(
-      formTemplate(
-         trackingId,
-         campaignName,
-         campaignType
-      )
-   );
+   try {
+      const savedTemplate = templateId
+         ? await AmpTemplate.findOne({
+            _id: templateId,
+            isActive: true
+         })
+         : templateSlug
+            ? await AmpTemplate.findOne({
+               slug: templateSlug,
+               isActive: true
+            })
+            : null;
+
+      if (savedTemplate?.formHtml) {
+         const email = Buffer
+            .from(trackingId, "base64")
+            .toString();
+
+         return res.send(
+            renderTrackedFormTemplate({
+               template: savedTemplate,
+               trackingId,
+               email,
+               subject,
+               campaignName,
+               campaignType
+            })
+         );
+      }
+
+      return res.send(
+         formTemplate(
+            trackingId,
+            subject,
+            campaignName,
+            campaignType
+         )
+      );
+   } catch (err) {
+      console.error("FORM TEMPLATE ERROR:", err);
+
+      return res.send(
+         formTemplate(
+            trackingId,
+            subject,
+            campaignName,
+            campaignType
+         )
+      );
+   }
 
 });
 

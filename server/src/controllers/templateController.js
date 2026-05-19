@@ -17,6 +17,7 @@ export const createTemplate = async (req, res) => {
       subject,
       html,
       amp,
+      formHtml,
       text,
       isActive
     } = req.body;
@@ -34,9 +35,10 @@ export const createTemplate = async (req, res) => {
       subject,
       html,
       amp,
+      formHtml,
       text,
       isActive,
-      variables: extractTemplateVariables(html, amp, subject)
+      variables: extractTemplateVariables(html, amp, formHtml, subject)
     });
 
     return res.status(201).json({
@@ -111,10 +113,11 @@ export const updateTemplate = async (req, res) => {
   try {
     const update = { ...req.body };
 
-    if (update.html || update.amp || update.subject) {
+    if (update.html || update.amp || update.formHtml || update.subject) {
       update.variables = extractTemplateVariables(
         update.html,
         update.amp,
+        update.formHtml,
         update.subject
       );
     }

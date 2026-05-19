@@ -28,6 +28,11 @@ const ampTemplateSchema = new mongoose.Schema(
       default: ""
     },
 
+    formHtml: {
+      type: String,
+      default: ""
+    },
+
     text: {
       type: String,
       default: "Your email client does not support HTML or AMP emails."

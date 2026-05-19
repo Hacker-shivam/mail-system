@@ -1,6 +1,54 @@
 import Tracking from "../models/Tracking.js";
 import getRenderData from "../utils/renderData.js";
 
+const parseSubmittedBody = (body) => {
+  if (!body) {
+    return {};
+  }
+
+  if (typeof body === "string") {
+    const trimmed = body.trim();
+
+    if (!trimmed) {
+      return {};
+    }
+
+    try {
+      return JSON.parse(trimmed);
+    } catch {
+      return Object.fromEntries(new URLSearchParams(trimmed));
+    }
+  }
+
+  if (typeof body === "object") {
+    return body;
+  }
+
+  return {};
+};
+
+const splitTrackingFields = (body) => {
+  const {
+    trackingid,
+    trackingId,
+    subject,
+    emailType,
+    campaignName,
+    campaignType,
+    ...formData
+  } = body;
+
+  return {
+    subject,
+    emailType,
+    campaignName,
+    campaignType,
+    formData,
+    trackingid,
+    trackingId
+  };
+};
+
 /* OPEN TRACKING */
 
 export const trackHandler = (emailType) => {
@@ -118,13 +166,20 @@ export const ampFormTracking = async (req, res) => {
 
     const email = Buffer.from(trackingId, "base64").toString();
 
+    const body = parseSubmittedBody(req.body);
+
     const {
-    subject,
-    emailType,
-    campaignName,
-    campaignType,
-   ...formData
-    } = req.body;
+      subject,
+      campaignName,
+      campaignType,
+      formData
+    } = splitTrackingFields(body);
+
+    console.log("AMP FORM BODY:", {
+      contentType: req.headers["content-type"],
+      body,
+      formData
+    });
 
 
      // CLICK TRACKING
@@ -221,15 +276,21 @@ export const htmlFormTracking = async (req, res) => {
       .from(trackingId, "base64")
       .toString();
 
-    const body = req.body || {};
+    const body = parseSubmittedBody(req.body);
 
     const {
-   subject,
-   emailType,
-   campaignName,
-   campaignType,
-   ...formData
-  } = body;
+      subject,
+      emailType,
+      campaignName,
+      campaignType,
+      formData
+    } = splitTrackingFields(body);
+
+    console.log("HTML/AMP WEB FORM BODY:", {
+      contentType: req.headers["content-type"],
+      body,
+      formData
+    });
 
     await Tracking.create({
 

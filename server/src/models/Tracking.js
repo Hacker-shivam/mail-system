@@ -80,7 +80,7 @@ const trackingSchema = new mongoose.Schema(
 
     formSubmission: {
 
-      type: Object,
+      type: mongoose.Schema.Types.Mixed,
 
       default: {}
     }
@@ -88,7 +88,8 @@ const trackingSchema = new mongoose.Schema(
   },
 
   {
-    timestamps: true
+    timestamps: true,
+    minimize: false
   }
 
 );
