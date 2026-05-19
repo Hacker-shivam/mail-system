@@ -6,7 +6,7 @@ export const unsubscribeHandler = async (req, res) => {
 
     const trackingId = req.params.id;
 
-    const tracking = await Tracking.findOneAndUpdate(
+    const tracking = await Tracking.create(
 
       { trackingId },
 
